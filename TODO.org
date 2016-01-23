@@ -1,0 +1,12 @@
+* DONE Translate Recipe into steps including quantities (plaintext)
+CLOSED: [2016-01-23 Sat 10:52]
+* DONE Translate into JSON with timings 
+CLOSED: [2016-01-23 Sat 10:52]
+* TODO Save TTS version of recipe into separate audio files (Python script?)
+* TODO Write player logic: 
+play until break, wait half of timing then play "next" plus next step, 
+wait quarter of timing then play "next" plus next step,
+wait for tap then play next step
+* TODO Update to use single audio file where you jump around
+* TODO Script to convert recipe csv to json? 
+ 
