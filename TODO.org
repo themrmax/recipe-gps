@@ -2,7 +2,13 @@
 CLOSED: [2016-01-23 Sat 10:52]
 * DONE Translate into JSON with timings 
 CLOSED: [2016-01-23 Sat 10:52]
-* TODO Save TTS version of recipe into separate audio files (Python script?)
+* DONE Save TTS version of recipe into separate audio files (Python script?)
+CLOSED: [2016-01-23 Sat 12:36]
+* DONE Decide on web framework. Django? Clojurescript?
+CLOSED: [2016-01-23 Sat 15:03]
+* TODO Load recipe json into webapp and display current step 
+* TODO Write some unit tests?!
+* TODO Change "OK Done that" from link into button
 * TODO Write player logic: 
 play until break, wait half of timing then play "next" plus next step, 
 wait quarter of timing then play "next" plus next step,
