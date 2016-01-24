@@ -1,7 +1,32 @@
 (ns recipe-gps.core
   (:require [sablono.core :as sab]))
 
+
 (def app-state (atom { :step 0 }))
+(def recipe-data 
+{:author "Melissa Clark"
+ :title "Garlicky Beet Spread with Yogurt, Dill and Horseradish"
+ :url "http://cooking.nytimes.com/recipes/1014374-garlicky-beet-spread-with-yogurt-dill-and-horseradish"
+ :steps [
+  {:steptext "Heat oven to 375 degrees.", :duration 10},
+  {:steptext "Scrub and trim [2 medium beets].", :duration 120},
+  {:steptext "Place beets in a small baking dish and drizzle with olive oil.", :duration 60},
+  {:steptext "Add 3 tablespoons water to bottom of dish and cover tightly with foil.", :duration 60},
+  {:steptext "Bake until tender, about 1 to 1 1/2 hours, turning beets after 45 minutes.", :duration 10},
+  {:steptext "Take out of the oven and let cool.", :duration 30},
+  {:steptext "Set up your food processor/blender.", :duration 30},
+  {:steptext "Peel and mince [1 large clove garlic].", :duration 60},
+  {:steptext "Chop [2 tablespoons of dill].", :duration 60},
+  {:steptext "Juice [1/2 lemon].", :duration 60},
+  {:steptext "Peel beets.", :duration 60},
+  {:steptext "Add [1/2 cup walnuts], garlic and [1 teaspoon salt]", :duration 60},
+  {:steptext "Process until very finely ground.", :duration 60},
+  {:steptext "Scrape down sides of bowl.", :duration 30},
+  {:steptext "Add the peeled beets, [2 tablespoons oil], [1 cup yogurt], lemon  juice, dill and [1.5 teaspoons prepared horseradish].", :duration  60},
+  {:steptext "Pulse until relatively smooth.", :duration 30},
+  {:steptext "Taste for seasoning and add more lemon or salt, or both, if needed.", :duration 30},
+  {:steptext "Serve with latkes or fritters, or use as a dip for vegetables.", :duration 10}
+  ]})
 
 (defn next-step [data]
   (let [i (:step @data)
@@ -17,7 +42,8 @@
 
 (defn recipe-step [data]
   (sab/html [:div
-             [:h1 "Recipe step: " (:step @data)]
+             [:h1 "Next step:"]
+             [:h1 (:steptext (nth (:steps recipe-data) (:step @data)))]
              [:div [:a {:href "#"
                         :onClick #(next-step data)
                         }

@@ -2,7 +2,8 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.170"]
                  [org.clojure/data.json "0.2.6"]
-                 [sablono "0.3.6"]]
+                 [sablono "0.3.6"]
+                 [cljs-asynchronize "0.1.0"]]
   :plugins [[lein-figwheel "0.5.0-1"]]
   :clean-targets [:target-path "out" "resources/public/cljs"] 
   :cljsbuild {
