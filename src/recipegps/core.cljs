@@ -1,4 +1,4 @@
-(ns recipe-gps.core
+(ns recipegps.core
   (:require [reagent.core :as r]))
 
 (def recipe-data

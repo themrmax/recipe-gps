@@ -1,4 +1,4 @@
-(defproject recipe-gps "0.6.0-alpha"
+(defproject recipegps "0.6.0-alpha"
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.107"]
                  [reagent "0.6.0-alpha"]
@@ -11,8 +11,8 @@
 
   :profiles {:dev {:cljsbuild
                    {:builds {:client
-                             {:figwheel {:on-jsload "recipe-gps.core/run"}
-                              :compiler {:main "recipe-gps.core"
+                             {:figwheel {:on-jsload "recipegps.core/run"}
+                              :compiler {:main "recipegps.core"
                                          :optimizations :none}}}}}
 
              :prod {:cljsbuild
