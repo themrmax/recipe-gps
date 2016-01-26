@@ -1,9 +1,7 @@
 (ns recipe-gps.core
-  (:require [sablono.core :as sab]))
+  (:require [reagent.core :as r]))
 
-
-(def app-state (atom { :step 0 }))
-(def recipe-data 
+(def recipe-data
 {:author "Melissa Clark"
  :title "Garlicky Beet Spread with Yogurt, Dill and Horseradish"
  :url "http://cooking.nytimes.com/recipes/1014374-garlicky-beet-spread-with-yogurt-dill-and-horseradish"
@@ -27,6 +25,8 @@
   {:steptext "Taste for seasoning and add more lemon or salt, or both, if needed.", :duration 30},
   {:steptext "Serve with latkes or fritters, or use as a dip for vegetables.", :duration 10}
   ]})
+(def app-state (r/atom { :step 0 }))
+(defonce seconds-remaining (r/atom 10))
 
 (defn next-step [data]
   (let [i (:step @data)
@@ -35,25 +35,34 @@
     (do
       (set! (.-src sound) sound-src)
       (.play sound)
-      (swap! data update-in [:step] inc))))
+      (swap! data update-in [:step] inc)
+      (reset! seconds-remaining (:duration (nth (:steps recipe-data) (:step @app-state)))))))
 
-(defn increment-counter  [data] (swap! data update-in [:step] inc))
+
+(defn timer-component []
+  (js/setInterval #(swap! seconds-remaining dec) 1000)
+  (fn []
+      [:div
+       "Seconds Remaining for this step: " (max @seconds-remaining 0)]))
 
 
-(defn recipe-step [data]
-  (sab/html [:div
-             [:h1 "Next step:"]
-             [:h1 (:steptext (nth (:steps recipe-data) (:step @data)))]
-             [:div [:a {:href "#"
-                        :onClick #(next-step data)
-                        }
-                    "OK, finished that."]]]))
 
-(defn render! []
-  (.render js/React
-           (recipe-step app-state)
-           (.getElementById js/document "app")))
 
-(add-watch app-state :on-change (fn [_ _ _ _] (render!)))
+(defn next-step-button []
+  [:div.next-step-button
+   [:div [:a {:href "#" :on-click #(next-step app-state)} "OK Finished that."]]])
 
-(render!)
+(defn reset-timer-button []
+  [:div.reset-timer-button
+   [:div [:a {:href "#" :on-click #(reset! seconds-remaining 50)} "reset timer"]]])
+
+(defn simple-example []
+  [:div
+   [:h1 (str "Next step: " (:steptext (nth (:steps recipe-data) (:step @app-state))))]
+  [timer-component]
+   [next-step-button]
+   [reset-timer-button]])
+
+(defn ^:export run []
+  (r/render [simple-example]
+            (js/document.getElementById "app")))

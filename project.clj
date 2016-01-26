@@ -1,21 +1,30 @@
-(defproject recipe-gps "0.1.0-SNAPSHOT"
+(defproject recipe-gps "0.6.0-alpha"
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [org.clojure/clojurescript "1.7.170"]
-                 [org.clojure/data.json "0.2.6"]
-                 [sablono "0.3.6"]
-                 [cljs-asynchronize "0.1.0"]]
-  :plugins [[lein-figwheel "0.5.0-1"]]
-  :clean-targets [:target-path "out" "resources/public/cljs"] 
-  :cljsbuild {
-              :builds [{:id "dev"
-                        :source-paths ["src"]
-                        :figwheel true
-                        :compiler {:main recipe-gps.core 
-                                   :asset-path "cljs/out"
-                                   :output-to  "resources/public/cljs/main.js"
-                                   :output-dir "resources/public/cljs/out"} 
-                        }]
-              }
-  :figwheel {
-             :css-dirs ["resources/public/css"]
-             })
+                 [org.clojure/clojurescript "1.7.107"]
+                 [reagent "0.6.0-alpha"]
+                 [figwheel "0.3.7"]]
+
+  :plugins [[lein-cljsbuild "1.0.6"]
+            [lein-figwheel "0.3.7"]]
+
+  :hooks [leiningen.cljsbuild]
+
+  :profiles {:dev {:cljsbuild
+                   {:builds {:client
+                             {:figwheel {:on-jsload "recipe-gps.core/run"}
+                              :compiler {:main "recipe-gps.core"
+                                         :optimizations :none}}}}}
+
+             :prod {:cljsbuild
+                    {:builds {:client
+                              {:compiler {:optimizations :advanced
+                                          :elide-asserts true
+                                          :pretty-print false}}}}}}
+
+  :figwheel {:repl false}
+
+  :cljsbuild {:builds {:client
+                       {:source-paths ["src"]
+                        :compiler {:asset-path "target/client"
+                                   :output-dir "resources/public/target/client"
+                                   :output-to "resources/public/target/client.js"}}}})
