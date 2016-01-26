@@ -6,17 +6,17 @@ CLOSED: [2016-01-23 Sat 10:52]
 CLOSED: [2016-01-23 Sat 12:36]
 * DONE Decide on web framework. Django? Clojurescript?
 CLOSED: [2016-01-23 Sat 15:03]
-* TODO Load recipe json into webapp and display current step 
-* TODO Write timer
+* DONE Load recipe json into webapp and display current step 
+* DONE Write timer
 * TODO Write some unit tests?!
 * TODO Write player logic: 
 play until break, wait half of timing then play "next" plus next step, 
 wait quarter of timing then play "next" plus next step,
 wait for tap then play next step
-* TODO Update to use single audio file where you jump around
 * TODO Script to convert recipe csv to json? 
 * TODO Try font from pomodoro
 * TODO Previous step button
 * TODO Change "OK Done that" from link into button
 * TODO Refactor next-step to take an arbitrary recipe as input
+* TODO Write webserver to server recipe data
  
