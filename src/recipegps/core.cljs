@@ -58,7 +58,8 @@
 
 (defn simple-example []
   [:div
-   [:h1 (str "Next step: " (:steptext (nth (:steps recipe-data) (:step @app-state))))]
+   [:h1 (str "Current step: " (:steptext (nth (:steps recipe-data) (:step @app-state))))]
+   [:h1 (str "Next step: " (:steptext (nth (:steps recipe-data) (inc (:step @app-state)))))]
   [timer-component]
    [next-step-button]
    [reset-timer-button]])
